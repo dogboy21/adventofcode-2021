@@ -5,8 +5,11 @@ abstract class DayCommon implements Runnable {
         if (test) fileName += "_test"
         fileName += ".txt"
 
-        def inputLines = this.getClass().getResource(fileName).readLines()
-        return inputLines
+        return this.getClass().getResource(fileName)
+    }
+
+    def readInputLines(boolean test = false) {
+        return this.readInput(test).readLines()
     }
 
     abstract def doPart1()

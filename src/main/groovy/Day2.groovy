@@ -1,7 +1,6 @@
 class Day2 extends DayCommon {
-
     def executeCommands(Map<String, Closure<?>> commands) {
-        def input = this.readInput()
+        def input = this.readInputLines()
 
         input.each {
             def commandData = it.split(" ")
@@ -47,5 +46,4 @@ class Day2 extends DayCommon {
 
         println "What do you get if you multiply your final horizontal position by your final depth? ${posHorizontal * posDepth}"
     }
-
 }
