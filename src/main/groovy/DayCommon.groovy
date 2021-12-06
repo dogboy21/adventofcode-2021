@@ -5,7 +5,7 @@ abstract class DayCommon implements Runnable {
         if (test) fileName += "_test"
         fileName += ".txt"
 
-        return this.getClass().getResource(fileName)
+        return this.getClass().getResource(fileName).text
     }
 
     def readInputLines(boolean test = false) {
