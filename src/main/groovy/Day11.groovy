@@ -1,5 +1,3 @@
-import java.util.concurrent.atomic.AtomicInteger
-
 class Day11 extends DayCommon {
     def flashOctopus(def grid, def x, def y, def flashedOctopuses) {
         def id = "$x:$y".toString()
@@ -20,7 +18,7 @@ class Day11 extends DayCommon {
         }
     }
 
-    def step(def grid, def totalFlashes) {
+    def step(def grid) {
         grid.each {it.eachWithIndex{ int entry, int i -> it[i] = entry + 1 } }
         def flashedOctopuses = []
 
@@ -38,8 +36,6 @@ class Day11 extends DayCommon {
             grid[y][x] = 0
         }
 
-        totalFlashes.addAndGet(flashedOctopuses.size())
-
         return flashedOctopuses.size()
     }
 
@@ -48,15 +44,15 @@ class Day11 extends DayCommon {
         def input = this.readInputLines().collect {
             it.split("").collect { it.toInteger() }
         }
-        def flashes = new AtomicInteger(0)
+        def flashes = 0
 
         for (i in 0..<100) {
-            this.step(input, flashes)
+            flashes += this.step(input)
         }
 
         input.each { println it.join(" ") }
 
-        println "How many total flashes are there after 100 steps? ${flashes.get()}"
+        println "How many total flashes are there after 100 steps? $flashes"
     }
 
     @Override
@@ -64,12 +60,11 @@ class Day11 extends DayCommon {
         def input = this.readInputLines().collect {
             it.split("").collect { it.toInteger() }
         }
-        def flashes = new AtomicInteger(0)
         def numStep = 0
 
         while (true) {
             numStep++
-            if (this.step(input, flashes) == input.size() * input[0].size()) {
+            if (this.step(input) == input.size() * input[0].size()) {
                 println "What is the first step during which all octopuses flash? $numStep"
                 break
             }
